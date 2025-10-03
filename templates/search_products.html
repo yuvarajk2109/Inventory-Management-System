@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Search Products</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Navigation Bar -->
+        <nav class="navbar" id="navbar">
+            <div class="navbar-container">
+                <!-- Functionality list -->
+                <ul class="navbar-menu" id="menu">
+                    <li><a href="{{ url_for('add_product') }}">Add new product</a></li>
+                    <li><a href="{{ url_for('search_products') }}">Search products</a></li>
+                    <li><a href="{{ url_for('log_inventory') }}">Log inventory</a></li>
+                    <li><a href="{{ url_for('view_product_logs') }}">View product logs</a></li>
+                    <li><a href="{{ url_for('transport_products') }}">Transport products</a></li>
+                    <li><a href="{{ url_for('view_transport_logs') }}">View transport logs</a></li>
+                </ul>
+
+                <div class="profile-logout">
+                    <a href="{{ url_for('profile') }}" class="btn btn-primary">Profile</a><br>
+                    <a href="{{ url_for('logout') }}" class="btn btn-danger">Logout</a>
+                </div>
+            </div>
+        </nav>
+        <div class="content">
+            <h1>Search Products</h1>
+            <form action="" method="post">
+                {{ form.hidden_tag() }}
+                <label for="search_by">Search by:</label>
+                <select id="search_by" name="search_by">
+                    <option value="id">Product ID</option>
+                    <option value="name">Product Name</option>
+                </select>
+                <br><br>
+                <label for="search_term">Search term:</label>
+                <input type="text" id="search_term" name="search_term" required>
+                <br><br>
+                <input type="submit" value="Search">
+            </form>
+
+            {% if products %}
+            <h2>Search Results:</h2>
+            <table>
+                <tr>
+                    <th>Product ID</th>
+                    <th>Product Name</th>
+                    <th>Quantity</th>
+                </tr>
+                {% for product in products %}
+                <tr>
+                    <td>{{ product[0] }}</td>
+                    <td>{{ product[1] }}</td>
+                    <td>{{ product[2] }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            {% endif %}
+        </div>
+    </div>
+</body>
+
+</html>

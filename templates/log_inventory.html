@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Add to Inventory</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Navigation Bar -->
+        <nav class="navbar" id="navbar">
+            <div class="navbar-container">
+                <!-- Functionality list -->
+                <ul class="navbar-menu" id="menu">
+                    <li><a href="{{ url_for('add_product') }}">Add new product</a></li>
+                    <li><a href="{{ url_for('search_products') }}">Search products</a></li>
+                    <li><a href="{{ url_for('log_inventory') }}">Log inventory</a></li>
+                    <li><a href="{{ url_for('view_product_logs') }}">View product logs</a></li>
+                    <li><a href="{{ url_for('transport_products') }}">Transport products</a></li>
+                    <li><a href="{{ url_for('view_transport_logs') }}">View transport logs</a></li>
+                </ul>
+
+                <div class="profile-logout">
+                    <a href="{{ url_for('profile') }}" class="btn btn-primary">Profile</a><br>
+                    <a href="{{ url_for('logout') }}" class="btn btn-danger">Logout</a>
+                </div>
+            </div>
+        </nav>
+        <div class="content">
+            <h1>Add to Inventory</h1>
+            <form action="" method="post">
+                {{ form.hidden_tag() }}
+                <label for="product_id">Product ID:</label>
+                <input type="number" id="product_id" name="product_id" required>
+                <br><br>
+                <label for="quantity_added">Quantity to add:</label>
+                <input type="number" id="quantity_added" name="quantity_added" required>
+                <br><br>
+                <input type="submit" value="Add to Inventory">
+            </form>
+
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <ul>
+                {% for message in messages %}
+                <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% endwith %}
+        </div>
+    </div>
+</body>
+
+</html>

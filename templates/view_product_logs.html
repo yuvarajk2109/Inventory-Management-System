@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>View Product Logs</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Navigation Bar -->
+        <nav class="navbar" id="navbar">
+            <div class="navbar-container">
+                <!-- Functionality list -->
+                <ul class="navbar-menu" id="menu">
+                    <li><a href="{{ url_for('add_product') }}">Add new product</a></li>
+                    <li><a href="{{ url_for('search_products') }}">Search products</a></li>
+                    <li><a href="{{ url_for('log_inventory') }}">Log inventory</a></li>
+                    <li><a href="{{ url_for('view_product_logs') }}">View product logs</a></li>
+                    <li><a href="{{ url_for('transport_products') }}">Transport products</a></li>
+                    <li><a href="{{ url_for('view_transport_logs') }}">View transport logs</a></li>
+                </ul>
+
+                <div class="profile-logout">
+                    <a href="{{ url_for('profile') }}" class="btn btn-primary">Profile</a><br>
+                    <a href="{{ url_for('logout') }}" class="btn btn-danger">Logout</a>
+                </div>
+            </div>
+        </nav>
+        <div class="content">
+            <h1>View Product Logs</h1>
+            <form action="" method="post">
+                {{ form.hidden_tag() }}
+                <label for="search_by">Search by:</label>
+                {{ form.search_by(class="form-control") }}
+                <br><br>
+                <div id="id_search" style="display: none;">
+                    <label for="product_id">Product ID:</label>
+                    {{ form.product_id(class="form-control") }}
+                    <br><br>
+                </div>
+                <div id="month_search" style="display: none;">
+                    <label for="month">Select month:</label>
+                    {{ form.month(class="form-control") }}
+                    <br><br>
+                </div>
+                <input type="submit" value="View Logs">
+            </form>
+
+            {% if product_logs %}
+            <h2>Product Logs:</h2>
+            <table>
+                <tr>
+                    <th>Product ID</th>
+                    <th>Product Name</th>
+                    <th>Quantity Added</th>
+                    <th>Log Date</th>
+                    <th>Log Time</th>
+                    <th>Logged by</th>
+                </tr>
+                {% for log in product_logs %}
+                <tr>
+                    <td>{{ log[0] }}</td>
+                    <td>{{ log[1] }}</td>
+                    <td>{{ log[2] }}</td>
+                    <td>{{ log[3] }}</td>
+                    <td>{{ log[4] }}</td>
+                    <td>{{ log[5] }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            {% endif %}
+        </div>
+    </div>
+    <script>
+        document.getElementById('search_by').addEventListener('change', function () {
+            var search_by = document.getElementById('search_by').value;
+            if (search_by == 'id') {
+                document.getElementById('id_search').style.display = 'block';
+                document.getElementById('month_search').style.display = 'none';
+            } else if (search_by == 'month') {
+                document.getElementById('id_search').style.display = 'none';
+                document.getElementById('month_search').style.display = 'block';
+            } else if (search_by == 'both') {
+                document.getElementById('id_search').style.display = 'block';
+                document.getElementById('month_search').style.display = 'block';
+            } else {
+                document.getElementById('id_search').style.display = 'none';
+                document.getElementById('month_search').style.display = 'none';
+            }
+        });
+    </script>
+</body>
+
+</html>
