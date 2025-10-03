@@ -1,0 +1,15 @@
+ALTER TABLE products_log
+ADD FOREIGN KEY (product_id) 
+REFERENCES products(id);
+
+ALTER TABLE products_log
+ADD FOREIGN KEY (user_id) 
+REFERENCES users(id);
+
+ALTER TABLE transports_log
+ADD FOREIGN KEY (product_id) 
+REFERENCES products(id);
+
+ALTER TABLE transports_log
+ADD FOREIGN KEY (user_id) 
+REFERENCES users(id);

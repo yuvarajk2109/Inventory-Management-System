@@ -1,0 +1,33 @@
+CREATE TABLE users (
+    id INT PRIMARY KEY,
+    email VARCHAR(255),
+    first_name VARCHAR(255),
+    last_name VARCHAR(255),
+    password VARCHAR(255),
+    registration_date DATE,
+    registration_time TIME
+);
+
+CREATE TABLE products (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255),
+    quantity INT
+);
+
+CREATE TABLE products_log (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    product_id INT,
+    quantity_added INT,
+    log_date DATE,
+    log_time TIME,
+    user_id INT
+);
+
+CREATE TABLE transports_log (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    product_id INT,
+    user_id INT,
+    quantity_transported INT,
+    log_date DATE,
+    log_time TIME
+);
