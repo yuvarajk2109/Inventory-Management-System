@@ -1,0 +1,41 @@
+<!-- dashboard.html -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Inventory Management System</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Navigation Bar -->
+        <nav class="navbar" id="navbar">
+            <div class="navbar-container">
+                <!-- Functionality list -->
+                <ul class="navbar-menu" id="menu">
+                    <li><a href="{{ url_for('add_product') }}">Add new product</a></li>
+                    <li><a href="{{ url_for('search_products') }}">Search products</a></li>
+                    <li><a href="{{ url_for('log_inventory') }}">Log inventory</a></li>
+                    <li><a href="{{ url_for('view_product_logs') }}">View product logs</a></li>
+                    <li><a href="{{ url_for('transport_products') }}">Transport products</a></li>
+                    <li><a href="{{ url_for('view_transport_logs') }}">View transport logs</a></li>
+                </ul>
+
+                <div class="profile-logout">
+                    <a href="{{ url_for('profile') }}" class="btn btn-primary">Profile</a><br>
+                    <a href="{{ url_for('logout') }}" class="btn btn-danger">Logout</a>
+                </div>
+            </div>
+        </nav>
+        <div class="content">
+            <h1>Inventory Management System</h1>
+
+            <!-- Welcome message -->
+            <p>Welcome, {{ first_name }}!</p>
+        </div>
+    </div>
+</body>
+
+</html>
